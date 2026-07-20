@@ -1,0 +1,19 @@
+.DS_Store
+.venv/
+.pytest_cache/
+.ruff_cache/
+.ty/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.coverage
+htmlcov/
+
+# Downloaded and generated experiment artifacts.
+.cache/
+data/
+checkpoints/
+results/
+*.safetensors
+*.pt
+*.pth

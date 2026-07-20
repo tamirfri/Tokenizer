@@ -1,0 +1,45 @@
+[build-system]
+requires = ["uv_build>=0.11.29,<0.12"]
+build-backend = "uv_build"
+
+[project]
+name = "continuous-byte-tokenizer"
+version = "0.1.0"
+description = "Lossless continuous byte-span tokenizer experiments for existing embedding tables"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "datasets>=3.0,<5",
+    "huggingface-hub>=0.33,<2",
+    "psutil>=6,<8",
+    "safetensors>=0.5,<1",
+    "torch>=2.7,<3",
+    "transformers>=4.55,<6",
+]
+
+[project.scripts]
+tokenizer = "continuous_tokenizer.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4,<10",
+    "ruff>=0.12,<1",
+    "ty>=0.0.1a15",
+]
+
+[tool.uv.build-backend]
+module-name = "continuous_tokenizer"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+markers = [
+    "integration: downloads and validates a real model asset",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "C4", "E", "F", "I", "PIE", "RUF", "SIM", "UP"]
