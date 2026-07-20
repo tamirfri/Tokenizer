@@ -1,0 +1,8 @@
+study = "input_alignment_feasibility"
+name = "gemma3-270m-input-alignment-feasibility-prospective"
+experiment = "gemma3-270m-alignment-feasibility-base.toml"
+vocabulary_subset_sizes = [128, 256, 512]
+training_seeds = [17]
+subset_seed = 17
+continuation_rule = "continue_only_while_alignment_gates_pass"
+prospective = true

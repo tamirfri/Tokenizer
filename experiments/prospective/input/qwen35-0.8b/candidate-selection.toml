@@ -1,0 +1,54 @@
+schema_version = 1
+artifact_kind = "prospective_candidate_selection"
+tier = "candidate_selection"
+name = "qwen35-0.8b-input-candidate-selection"
+mode = "input_only"
+experiment = "../../../campaigns/input/qwen35-0.8b/seed-17.toml"
+final_reference = "../../../campaigns/input/qwen35-0.8b/seed-17.toml"
+
+[wall_clock]
+expected_seconds = 900
+maximum_seconds = 1200
+stop_boundary = "epoch_or_stage"
+[wall_clock.calibration]
+locator = "../../calibration/qwen35-0.8b-input-selection.json"
+sha256 = "ae7a8dfa06ecf99640c530d661ef0da4863a67a7960e86e8ae47c60282121658"
+[wall_clock.work_units]
+behavior_samples = 2
+distillation_windows = 0
+generation_samples = 0
+reconstruction_samples = 64
+validation_bytes = 256
+vocabulary_epochs = 2
+vocabulary_rows = 512
+
+[design]
+vocabulary_rows = 512
+vocabulary_epochs = 2
+reconstruction_epochs = 1
+reconstruction_samples = 64
+distillation_windows = 0
+validation_bytes = 256
+behavior_samples = 2
+generation_samples = 0
+patience = 1
+maximum_alignment_trials = 1
+maximum_efficiency_trials = 2
+subset_seed = 17
+subset_sha256 = "e734c291fc8cc11af3964aba8c95c5f6ee1d31764dcd3a0abfebc05cb189ddb6"
+sampler_seed = 17
+data_role = "validation"
+load_final_test = false
+
+[[design.candidates]]
+name = "alignment-reconstruction"
+kind = "alignment"
+parameters = { strategy = "reconstruction_only", batch_size = 64 }
+[[design.candidates]]
+name = "smallest"
+kind = "efficiency"
+parameters = { strategy = "reconstruction_only", batch_size = 64, projection_multiplier = 2, muon_ns_steps = 3 }
+[[design.candidates]]
+name = "largest"
+kind = "efficiency"
+parameters = { strategy = "reconstruction_only", batch_size = 128, projection_multiplier = 8, muon_ns_steps = 5 }

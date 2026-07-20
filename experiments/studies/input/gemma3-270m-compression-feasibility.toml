@@ -1,0 +1,12 @@
+study = "input_compression_feasibility"
+name = "gemma3-270m-input-compression-feasibility-prospective"
+experiment = "gemma3-270m-compression-feasibility-base.toml"
+training_seeds = [17]
+vocabulary_subset_size = 512
+subset_seed = 17
+candidate_lengths = [2, 8, 32]
+binary_samples_per_length = 2
+validation_bytes = 512
+continuation_rule = "continue_only_after_all_seed_exactness_density_and_behavior_pass"
+final_action = "record_freeze_eligibility_only"
+prospective = true

@@ -1,0 +1,1 @@
+{"artifact_kind":"timing_calibration","device":"cpu","mode":"output_only","model_id":"continuous-tokenizer/synthetic-model","model_revision":"synthetic","observed_seconds":120.0,"schema_version":1,"work_units":{"behavior_samples":1,"distillation_windows":0,"generation_samples":0,"reconstruction_samples":0,"validation_bytes":16,"vocabulary_epochs":10,"vocabulary_rows":3}}

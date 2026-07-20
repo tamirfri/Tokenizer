@@ -1,0 +1,28 @@
+schema_version = 1
+artifact_kind = "prospective_mechanism_smoke"
+tier = "mechanism_smoke"
+name = "qwen35-0.8b-input-mechanism-smoke"
+mode = "input_only"
+experiment = "../../../synthetic/input-smoke.toml"
+final_reference = "../../../campaigns/input/qwen35-0.8b/seed-17.toml"
+
+[wall_clock]
+expected_seconds = 120
+maximum_seconds = 300
+stop_boundary = "epoch_or_stage"
+
+[wall_clock.calibration]
+locator = "../../calibration/qwen35-0.8b-input-mechanism.json"
+sha256 = "bd8b73ecf3c61d376d722d3380a300807f2f4c6751d29b0d38916302adf7147f"
+
+[wall_clock.work_units]
+behavior_samples = 1
+distillation_windows = 0
+generation_samples = 1
+reconstruction_samples = 64
+validation_bytes = 64
+vocabulary_epochs = 20
+vocabulary_rows = 3
+
+[design]
+proof_role = "synthetic"

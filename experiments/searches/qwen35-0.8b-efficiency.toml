@@ -1,0 +1,19 @@
+mode = "input_only"
+study = "efficiency"
+name = "qwen3.5-0.8b-large-efficiency-search"
+experiment = "qwen35-0.8b-alignment-base.toml"
+final_experiment = "../campaigns/input/qwen35-0.8b/seed-17.toml"
+trials = 2
+sampler_seed = 20260724
+vocabulary_rows = 512
+vocabulary_epochs = 2
+patience = 1
+evaluation_interval = 1
+minimum_runtime_improvement = 0.05
+
+[space]
+learning_rate_min = 0.00001
+learning_rate_max = 0.0006
+batch_sizes = [256, 512, 1024]
+projection_multipliers = [2, 4, 8]
+muon_ns_steps = [3, 5]

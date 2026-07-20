@@ -1,0 +1,73 @@
+name = "qwen3.5-0.8b-output-only-seed-41"
+mode = "output_only"
+evidence_scope = "candidate"
+device = "mps"
+seed = 41
+stages = ["output_codec"]
+
+[model]
+id = "Qwen/Qwen3.5-0.8B"
+revision = "2fc06364715b967f1860aea9cf38778875588b17"
+evaluation = "full"
+
+[dataset]
+id = "Salesforce/wikitext"
+config = "wikitext-103-raw-v1"
+revision = "b08601e04326c79dfdd32d625aee71d232d685c3"
+
+[runtime]
+corpus_max_rows = 512
+cache_chunk_rows = 32
+snapshot_interval = 100
+projected_run_bytes = 17179869184
+storage_reserve_bytes = 10737418240
+inductor_cache_estimate_bytes = 8589934592
+minimum_mps_memory_bytes = 34359738368
+
+[training]
+profile = "large"
+max_span = 8
+epochs = 2
+batch_size = 64
+learning_rate = 0.00010308323900624301
+weight_decay = 0.00001
+
+[evaluation]
+batch_size = 8
+samples = 16
+max_macro_steps = 16
+max_output_bytes = 512
+warmups = 1
+repetitions = 2
+prompt_set = "frozen-greedy-fidelity"
+prompt_set_sha256 = "a8990030d201c6076ab3eae8425e1f78a51855b19739b723d621acb3dd186ee7"
+oracle_span_limits = [1, 2, 4, 8]
+
+[evaluation.training_corpus]
+split = "train"
+seed = 1701
+
+[evaluation.checkpoint_selection_corpus]
+split = "train"
+seed = 1702
+
+[evaluation.oracle_validation_corpus]
+split = "validation"
+seed = 1703
+
+[evaluation.final_test_corpus]
+split = "registered_prompts"
+seed = 1704
+
+[gates]
+minimum_direct_feedback_equality = 1.0
+maximum_invalid_events = 0
+minimum_valid_non_empty_termination = 1.0
+minimum_control_prompt_coverage = 0.25
+minimum_control_precision = 1.0
+minimum_control_recall = 1.0
+minimum_stop_precision = 1.0
+minimum_stop_recall = 1.0
+minimum_native_tokens_per_attempted_macro_step = 1.10
+minimum_rollout_event_agreement = 0.50
+maximum_candidate_reference_state_ratio = 0.50

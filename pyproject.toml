@@ -1,20 +1,20 @@
 [build-system]
-requires = ["uv_build>=0.11.29,<0.12"]
+requires = ["uv_build>=0.11.30,<0.12"]
 build-backend = "uv_build"
 
 [project]
 name = "continuous-byte-tokenizer"
 version = "0.1.0"
-description = "Lossless continuous byte-span tokenizer experiments for existing embedding tables"
+description = "Continuous byte tokenizer research with latent-vector representations for frozen language models"
 readme = "README.md"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.14,<3.15"
 dependencies = [
-    "datasets>=3.0,<5",
-    "huggingface-hub>=0.33,<2",
-    "psutil>=6,<8",
-    "safetensors>=0.5,<1",
-    "torch>=2.7,<3",
-    "transformers>=4.55,<6",
+    "datasets>=5.0,<6",
+    "huggingface-hub>=1.24,<2",
+    "psutil>=7.2.2,<8",
+    "safetensors>=0.8,<1",
+    "torch>=2.13,<3",
+    "transformers>=5.14.1,<6",
 ]
 
 [project.scripts]
@@ -22,24 +22,50 @@ tokenizer = "continuous_tokenizer.cli:main"
 
 [dependency-groups]
 dev = [
-    "pytest>=8.4,<10",
-    "ruff>=0.12,<1",
-    "ty>=0.0.1a15",
+    "pre-commit>=4.6.1",
+    "ruff>=0.15.22,<1",
+    "ty>=0.0.61,<1",
+]
+ui = [
+    "bertviz>=1.4.1,<2",
+    "streamlit>=1.59.2,<2",
+]
+search = [
+    "optuna>=4.9,<5",
+    "tomli-w>=1.2.0,<2",
 ]
 
 [tool.uv.build-backend]
 module-name = "continuous_tokenizer"
 
-[tool.pytest.ini_options]
-addopts = "-ra"
-markers = [
-    "integration: downloads and validates a real model asset",
-]
-testpaths = ["tests"]
-
 [tool.ruff]
-line-length = 100
-target-version = "py312"
+line-length = 160
+target-version = "py314"
 
 [tool.ruff.lint]
-select = ["B", "C4", "E", "F", "I", "PIE", "RUF", "SIM", "UP"]
+select = ["ALL"]
+extend-select = ["PYI041"]
+ignore = [
+    "ANN401", # Dynamic library and artifact boundaries intentionally accept Any.
+    "COM812", # Conflicts with the formatter.
+    "D",      # Public names are kept self-explanatory instead of requiring boilerplate docstrings.
+    "EM",     # Direct exception messages are clearer than temporary message bindings.
+    "FBT",    # Boolean policy flags are explicit at call sites and in dataclass contracts.
+    "INP001", # Tests and namespace-style package directories intentionally omit __init__.py.
+    "ISC001", # Conflicts with the formatter.
+    "N806",   # Mathematical tensor names conventionally use uppercase letters.
+    "N812",   # Conventional aliases such as torch.nn.functional as F are clearer.
+    "PLC0415", # Local imports intentionally defer optional dependencies and avoid cycles.
+    "PLR2004", # Scientific thresholds and test expectations are clearer as local literals.
+    "PT",      # The project deliberately uses standard-library unittest, not pytest.
+    "S311",    # Seeded pseudo-randomness is required for reproducible sampling, not security.
+    "S404",
+    "S603",
+    "S607",    # Subprocess commands are fixed local tool invocations without shell expansion.
+    "TC",      # Runtime annotations and dataclass introspection require ordinary imports.
+    "TRY003",  # Direct, contextual exception messages are preferred over custom exception classes.
+    "TRY004",  # Strict parsers consistently expose malformed contracts as ValueError.
+]
+[tool.ruff.lint.per-file-ignores]
+"src/continuous_tokenizer/cli.py" = ["T201"]
+"tests/**/*.py" = ["ANN", "PLC2701", "S101", "S108", "SLF001"]

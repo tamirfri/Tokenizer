@@ -1,0 +1,6 @@
+study = "output_oracle"
+name = "gemma3-270m-output-oracle"
+experiment = "../../searches/gemma3-270m-output-base.toml"
+corpus_role = "oracle_validation"
+span_limits = [1, 2, 4, 8]
+selection_rule = "largest_feasible_span"

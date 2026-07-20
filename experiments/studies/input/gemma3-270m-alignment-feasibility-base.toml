@@ -1,0 +1,69 @@
+name = "gemma3-270m-input-alignment-feasibility-prospective-base"
+mode = "input_only"
+evidence_scope = "candidate"
+device = "mps"
+seed = 17
+stages = ["vocabulary"]
+
+[model]
+id = "google/gemma-3-270m-it"
+revision = "ac82b4e820549b854eebf28ce6dedaf9fdfa17b3"
+evaluation = "full"
+
+[dataset]
+id = "Salesforce/wikitext"
+config = "wikitext-103-raw-v1"
+revision = "b08601e04326c79dfdd32d625aee71d232d685c3"
+
+[runtime]
+corpus_max_rows = 512
+cache_chunk_rows = 32
+snapshot_interval = 100
+projected_run_bytes = 8589934592
+storage_reserve_bytes = 5368709120
+inductor_cache_estimate_bytes = 4294967296
+minimum_mps_memory_bytes = 17179869184
+
+[training]
+profile = "large"
+strategy = "candidate_selection"
+projection_multiplier = 8
+batch_size = 64
+learning_rate = 0.0001
+weight_decay = 0.0
+muon_ns_steps = 5
+vocabulary_epochs = 2
+reconstruction_epochs = 0
+reconstruction_samples = 0
+reconstruction_vocabulary_fraction = 0.75
+validation_bytes = 256
+patience = 1
+evaluation_interval = 1
+distillation_epochs = 0
+distillation_windows = 0
+distillation_prompt_tokens = 16
+distillation_continuation_tokens = 4
+
+[evaluation]
+batch_size = 8
+samples = 2
+prompt_tokens = 16
+continuation_tokens = 4
+generation_samples = 0
+max_new_tokens = 4
+warmups = 0
+repetitions = 1
+tokenizer_repetitions = 1
+retrieval_queries = 64
+max_test_bytes = 256
+
+[gates]
+maximum_normalized_rmse = 0.01
+minimum_cosine_p01 = 0.999
+minimum_cosine_p50 = 0.9999
+minimum_native_tokens_per_continuous_token = 1.10
+maximum_candidate_reference_state_ratio = 0.50
+maximum_segmented_mean_kl = 0.10
+maximum_segmented_nll_delta = 0.10
+minimum_segmented_top1_agreement = 0.90
+minimum_segmented_generation_byte_similarity = 0.50

@@ -1,0 +1,51 @@
+schema_version = 1
+artifact_kind = "prospective_candidate_selection"
+tier = "candidate_selection"
+name = "gemma3-270m-input-candidate-selection"
+mode = "input_only"
+experiment = "../../../campaigns/input/gemma3-270m/seed-17.toml"
+final_reference = "../../../campaigns/input/gemma3-270m/seed-17.toml"
+[wall_clock]
+expected_seconds = 900
+maximum_seconds = 1200
+stop_boundary = "epoch_or_stage"
+[wall_clock.calibration]
+locator = "../../calibration/gemma3-270m-input-selection.json"
+sha256 = "27e2a242cefad578cf4271213749f860829c3140dfbb71ce8f91aa558d8b5ac8"
+[wall_clock.work_units]
+behavior_samples = 2
+distillation_windows = 0
+generation_samples = 0
+reconstruction_samples = 64
+validation_bytes = 256
+vocabulary_epochs = 2
+vocabulary_rows = 512
+[design]
+vocabulary_rows = 512
+vocabulary_epochs = 2
+reconstruction_epochs = 1
+reconstruction_samples = 64
+distillation_windows = 0
+validation_bytes = 256
+behavior_samples = 2
+generation_samples = 0
+patience = 1
+maximum_alignment_trials = 1
+maximum_efficiency_trials = 2
+subset_seed = 17
+subset_sha256 = "51e50f00426dad3f75ef415049de33ab258f04a2a6b7fe3fdb946c6ebeca473a"
+sampler_seed = 17
+data_role = "validation"
+load_final_test = false
+[[design.candidates]]
+name = "alignment-reconstruction"
+kind = "alignment"
+parameters = { strategy = "reconstruction_only", batch_size = 64 }
+[[design.candidates]]
+name = "smallest"
+kind = "efficiency"
+parameters = { strategy = "reconstruction_only", batch_size = 64, projection_multiplier = 2, muon_ns_steps = 3 }
+[[design.candidates]]
+name = "largest"
+kind = "efficiency"
+parameters = { strategy = "reconstruction_only", batch_size = 128, projection_multiplier = 8, muon_ns_steps = 5 }

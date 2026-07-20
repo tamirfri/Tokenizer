@@ -1,0 +1,15 @@
+name = "qwen3.5-0.8b-large-row-balanced-overfit"
+experiment = "../campaigns/input/qwen35-0.8b/seed-17.toml"
+final_experiment = "../campaigns/input/qwen35-0.8b/seed-17.toml"
+trials = 1
+sampler_seed = 20260723
+vocabulary_rows = 512
+vocabulary_epochs = 3
+patience = 1
+evaluation_interval = 1
+
+[space]
+learning_rate_min = 0.000014496048586998116
+learning_rate_max = 0.000014496048586998116
+weight_decays = [0.0]
+batch_sizes = [64]

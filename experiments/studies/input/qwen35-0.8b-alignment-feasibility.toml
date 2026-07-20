@@ -1,0 +1,8 @@
+study = "input_alignment_feasibility"
+name = "qwen3.5-0.8b-input-alignment-feasibility-prospective"
+experiment = "qwen35-0.8b-alignment-feasibility-base.toml"
+vocabulary_subset_sizes = [128, 256, 512]
+training_seeds = [17]
+subset_seed = 17
+continuation_rule = "continue_only_while_alignment_gates_pass"
+prospective = true

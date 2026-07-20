@@ -1,0 +1,6 @@
+study = "output_oracle"
+name = "qwen3.5-0.8b-output-oracle"
+experiment = "../../searches/qwen35-0.8b-output-base.toml"
+corpus_role = "oracle_validation"
+span_limits = [1, 2, 4, 8]
+selection_rule = "largest_feasible_span"

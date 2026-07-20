@@ -1,0 +1,49 @@
+schema_version = 1
+artifact_kind = "prospective_candidate_selection"
+tier = "candidate_selection"
+name = "qwen35-0.8b-output-candidate-selection"
+mode = "output_only"
+experiment = "../../../campaigns/output/qwen35-0.8b/seed-17.toml"
+final_reference = "../../../campaigns/output/qwen35-0.8b/seed-17.toml"
+[wall_clock]
+expected_seconds = 900
+maximum_seconds = 1200
+stop_boundary = "epoch_or_stage"
+[wall_clock.calibration]
+locator = "../../calibration/qwen35-0.8b-output-selection.json"
+sha256 = "8746f1a3db0b9b2a884fde4e8e9878280d49e0cac88d06ed12e94c8e70b8247e"
+[wall_clock.work_units]
+behavior_samples = 2
+distillation_windows = 0
+generation_samples = 0
+reconstruction_samples = 0
+validation_bytes = 256
+vocabulary_epochs = 2
+vocabulary_rows = 512
+[design]
+vocabulary_rows = 512
+vocabulary_epochs = 2
+reconstruction_epochs = 0
+reconstruction_samples = 0
+distillation_windows = 0
+validation_bytes = 256
+behavior_samples = 2
+generation_samples = 0
+patience = 1
+maximum_alignment_trials = 1
+maximum_efficiency_trials = 2
+sampler_seed = 17
+data_role = "validation"
+load_final_test = false
+[[design.candidates]]
+name = "oracle-span-2"
+kind = "alignment"
+parameters = { max_span = 2 }
+[[design.candidates]]
+name = "span-4"
+kind = "efficiency"
+parameters = { max_span = 4, batch_size = 64 }
+[[design.candidates]]
+name = "span-8"
+kind = "efficiency"
+parameters = { max_span = 8, batch_size = 64 }

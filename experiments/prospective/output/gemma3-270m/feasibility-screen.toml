@@ -1,0 +1,32 @@
+schema_version = 1
+artifact_kind = "prospective_feasibility_screen"
+tier = "feasibility_screen"
+name = "gemma3-270m-output-feasibility-screen"
+mode = "output_only"
+experiment = "../../../campaigns/output/gemma3-270m/seed-17.toml"
+final_reference = "../../../campaigns/output/gemma3-270m/seed-17.toml"
+[wall_clock]
+expected_seconds = 600
+maximum_seconds = 900
+stop_boundary = "epoch_or_stage"
+[wall_clock.calibration]
+locator = "../../calibration/gemma3-270m-output.json"
+sha256 = "1af3fa4d3694e2a35818d84b0c254965e6afab136e7a71e705878d43a9541fec"
+[wall_clock.work_units]
+behavior_samples = 2
+distillation_windows = 0
+generation_samples = 0
+reconstruction_samples = 0
+validation_bytes = 256
+vocabulary_epochs = 1
+vocabulary_rows = 256
+[design]
+vocabulary_rows = 256
+vocabulary_epochs = 1
+reconstruction_epochs = 0
+reconstruction_samples = 0
+distillation_windows = 0
+validation_bytes = 256
+behavior_samples = 2
+generation_samples = 0
+load_final_test = false

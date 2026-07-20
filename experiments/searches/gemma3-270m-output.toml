@@ -1,0 +1,14 @@
+mode = "output_only"
+name = "gemma3-270m-large-output-codec-search"
+experiment = "gemma3-270m-output-base.toml"
+final_experiment = "../campaigns/output/gemma3-270m/seed-17.toml"
+trials = 2
+sampler_seed = 20260723
+fallback_rule = "best_exact_full_sequence_rate"
+pilot_documents = 4
+
+[space]
+learning_rate_min = 0.00001
+learning_rate_max = 0.0003
+weight_decays = [0.0, 0.00001, 0.0001]
+batch_sizes = [32, 64, 128]

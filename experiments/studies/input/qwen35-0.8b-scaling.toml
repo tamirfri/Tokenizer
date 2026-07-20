@@ -1,0 +1,10 @@
+study = "input_selection"
+name = "qwen3.5-0.8b-input-large-scaling"
+kind = "scaling"
+experiment = "../../campaigns/input/qwen35-0.8b/seed-17.toml"
+vocabulary_subset_sizes = [128, 256, 512]
+candidate_lengths = [2, 8, 32]
+binary_samples_per_length = 2
+validation_bytes = 512
+run_selection = false
+selection_rule = "feasible_min_kl_js_nll_max_top1_density"

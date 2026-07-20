@@ -1,0 +1,32 @@
+schema_version = 1
+artifact_kind = "prospective_feasibility_screen"
+tier = "feasibility_screen"
+name = "qwen35-0.8b-output-feasibility-screen"
+mode = "output_only"
+experiment = "../../../campaigns/output/qwen35-0.8b/seed-17.toml"
+final_reference = "../../../campaigns/output/qwen35-0.8b/seed-17.toml"
+[wall_clock]
+expected_seconds = 600
+maximum_seconds = 900
+stop_boundary = "epoch_or_stage"
+[wall_clock.calibration]
+locator = "../../calibration/qwen35-0.8b-output.json"
+sha256 = "2cc26f67ece81c3e4bd83c6e7f5e29987996a7ee70161aacdfdb7b305eebbc94"
+[wall_clock.work_units]
+behavior_samples = 2
+distillation_windows = 0
+generation_samples = 0
+reconstruction_samples = 0
+validation_bytes = 256
+vocabulary_epochs = 1
+vocabulary_rows = 256
+[design]
+vocabulary_rows = 256
+vocabulary_epochs = 1
+reconstruction_epochs = 0
+reconstruction_samples = 0
+distillation_windows = 0
+validation_bytes = 256
+behavior_samples = 2
+generation_samples = 0
+load_final_test = false
